@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday My Love!</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #ff4e50, #f9d423);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: #fff;
+      text-align: center;
+    }
+    .heart {
+      position: absolute;
+      bottom: -10px;
+      font-size: 24px;
+      animation: floatUp 4s linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      width: 90%;
+      max-width: 350px;
+      z-index: 10;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    h1 {
+      font-size: 2rem;
+      animation: heartbeat 1.2s infinite alternate;
+      margin-bottom: 10px;
+    }
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+    p { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.4; }
+    .gift {
+      font-size: 70px;
+      cursor: pointer;
+      animation: shake 1.5s infinite;
+      display: inline-block;
+    }
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(-10deg); }
+      40% { transform: rotate(10deg); }
+      60% { transform: rotate(-5deg); }
+      80% { transform: rotate(5deg); }
+    }
+    .surprises {
+      display: none;
+      margin-top: 15px;
+      animation: popup 0.8s ease-in-out forwards;
+    }
+    @keyframes popup {
+      0% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .gift-icons { font-size: 35px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>💖 Happy Birthday! 💖</h1>
+    <p>Aap meri zindagi ki sabse pyari gift ho! Love you forever! 🌹✨</p>
+    
+    <div class="gift" onclick="showGifts()">🎁</div>
+    <div style="font-size: 12px; opacity: 0.8; margin-top: 5px;">(Gift par tap karo)</div>
+
+    <div class="surprises" id="giftsArea">
+      <h3>Aapke Liye Gifts:</h3>
+      <div class="gift-icons">💐 🧸 💍 🎂</div>
+      <p style="margin-top: 10px; font-weight: bold;">I Love You! ❤️</p>
+    </div>
+  </div>
+
+  <script>
+    setInterval(() => {
+      let heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }, 300);
+
+    function showGifts() {
+      document.getElementById('giftsArea').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
