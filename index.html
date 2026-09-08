@@ -1,278 +1,317 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy 19th Birthday Durga! ❤️</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body {
-      background: linear-gradient(135deg, #1a000c, #4a001f, #800020);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      color: #fff;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salgira Mubarak, Durga! ❤️</title>
+    <style>
+        @font-face {
+            font-family: 'Satisfy';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/satisfy/v14/rP2Hp2yn6M65_OnJ_v-fxg.woff2) format('woff2');
+        }
 
-    /* Floating Canvas Elements */
-    .particle {
-      position: absolute;
-      pointer-events: none;
-      animation: floatUp 4s linear infinite;
-      z-index: 1;
-    }
-    @keyframes floatUp {
-      0% { transform: translateY(105vh) scale(0.6) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(-10vh) scale(1.4) rotate(360deg); opacity: 0; }
-    }
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #ffe0e0; /* Fallback */
+            background-image: linear-gradient(135deg, #fff0f0 0%, #ffdde1 100%);
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Satisfy', cursive;
+            user-select: none;
+            cursor: pointer;
+        }
 
-    /* Main Romantic Card */
-    .card-container {
-      position: relative;
-      z-index: 10;
-      width: 90%;
-      max-width: 420px;
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1.5px solid rgba(255, 182, 193, 0.4);
-      border-radius: 25px;
-      padding: 35px 25px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(255,192,203,0.2);
-    }
+        /* Floating Background Layer */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
 
-    .badge {
-      display: inline-block;
-      background: linear-gradient(45deg, #ff007f, #ff5e62);
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 10px rgba(255,0,127,0.4);
-    }
+        /* Floating Image (Slow Motion) */
+        .floating-image {
+            position: fixed;
+            opacity: 0.15;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.5);
+            animation: floatSlow 60s linear infinite;
+            z-index: 2;
+            pointer-events: none;
+        }
 
-    h1 {
-      font-size: 1.8rem;
-      color: #fff0f5;
-      text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f;
-      line-height: 1.3;
-      margin-bottom: 15px;
-    }
+        /* Main Content Layer */
+        #content-layer {
+            position: relative;
+            z-index: 10;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
 
-    .big-title {
-      font-size: 2.5rem;
-      font-weight: 900;
-      background: linear-gradient(to right, #ffe6e8, #ff69b4, #ff1493);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin: 15px 0;
-      animation: pulse 1.5s infinite alternate;
-    }
+        /* Message Elements with Modern Transitions */
+        .message-block {
+            display: none; /* Hidden by default */
+            transition: transform 1.5s ease-out, opacity 1s ease-in-out;
+            transform: translateY(30px);
+            opacity: 0;
+        }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.06); }
-    }
+        .message-block.visible {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
 
-    p.subtitle {
-      font-size: 1.1rem;
-      color: #ffdeeb;
-      line-height: 1.5;
-      margin-bottom: 25px;
-    }
+        .subtext {
+            font-size: 2.2rem;
+            color: #d81b60;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
 
-    /* Tap Button */
-    .tap-btn {
-      background: linear-gradient(45deg, #ff1493, #ff69b4);
-      color: white;
-      border: none;
-      padding: 14px 28px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(255, 20, 147, 0.5);
-      transition: all 0.3s ease;
-      outline: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
+        .big-title {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #b71c1c;
+            line-height: 1.1;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
 
-    .tap-btn:active {
-      transform: scale(0.92);
-      box-shadow: 0 4px 10px rgba(255, 20, 147, 0.8);
-    }
+        .sub-subtext {
+            font-size: 1.6rem;
+            color: #ec407a;
+            margin-top: 10px;
+        }
 
-    .step-counter {
-      margin-top: 15px;
-      font-size: 12px;
-      color: #ffb6c1;
-      opacity: 0.8;
-    }
+        .tap-msg {
+            font-size: 1.4rem;
+            color: #ec407a;
+            margin-top: 50px;
+            font-style: italic;
+            animation: pulse 2s infinite;
+        }
 
-    /* Confetti & Burst effects */
-    .burst-emoji {
-      position: absolute;
-      pointer-events: none;
-      font-size: 30px;
-      animation: burst 1.2s ease-out forwards;
-      z-index: 20;
-    }
-    @keyframes burst {
-      0% { transform: translate(0,0) scale(0.5); opacity: 1; }
-      100% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 0; }
-    }
-  </style>
+        /* Animation Keyframes */
+        @keyframes floatSlow {
+            0% { top: 10%; left: 10%; }
+            25% { top: 60%; left: 70%; }
+            50% { top: 30%; left: 40%; }
+            75% { top: 80%; left: 20%; }
+            100% { top: 10%; left: 10%; }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        /* Floating Element Styles (Slow Motion) */
+        .float-obj {
+            position: absolute;
+            pointer-events: none;
+            animation: floatObjSlow 20s linear infinite;
+        }
+
+        @keyframes floatObjSlow {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+    </style>
 </head>
-<body>
+<body onclick="handleTap()">
 
-  <!-- Background Music (Auto-plays after first tap) -->
-  <audio id="bgMusic" loop preload="auto">
-    <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sunset-2615.mp3" type="audio/mpeg">
-  </audio>
+    <!-- Fixed Floating Background Image (Slow Motion) -->
+    <img src="image_8.png" class="floating-image" alt="Durga Bhuj">
 
-  <div class="card-container" id="card">
-    <div class="badge">SPECIAL DAY 🎂</div>
-    <h1 id="heading">Happy Birthday Durga ❤️</h1>
-    <p class="subtitle" id="subtext">Tumhe tumhre janm din ki bohot bohot subhkamna! ✨</p>
-    
-    <div id="extraContent"></div>
+    <!-- Canvas for Floating Particle Effects -->
+    <canvas id="bg-canvas"></canvas>
 
-    <button class="tap-btn" onclick="nextTap()">
-      <span id="btnText">Tap Karo Durga 🎁</span>
-    </button>
-    
-    <div class="step-counter" id="stepCounter">Tap 1 of 9</div>
-  </div>
+    <!-- Main Dynamic Content Layer -->
+    <div id="content-layer">
 
-  <script>
-    let currentStep = 1;
-    const totalSteps = 9;
+        <!-- STAGE 1: Greeting -->
+        <div class="message-block visible" id="stage-1">
+            <p class="subtext">happy birthday durga tumhe tumhre janm din k subhkamna</p>
+            <p class="tap-msg">(tap karo...) </p>
+        </div>
 
-    // Background Floating Rose & Heart Generator
-    function createFloatingParticles() {
-      const symbols = ['🌹', '💖', '🌸', '✨', '🎁', '🎂', '🌷', '💘'];
-      setInterval(() => {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-        particle.style.left = Math.random() * 100 + 'vw';
-        particle.style.animationDuration = (Math.random() * 2 + 3) + 's';
-        particle.style.fontSize = (Math.random() * 15 + 20) + 'px';
-        document.body.appendChild(particle);
-        setTimeout(() => particle.remove(), 4000);
-      }, 250);
-    }
-    createFloatingParticles();
+        <!-- STAGE 2: Flowers & Title -->
+        <div class="message-block" id="stage-2">
+            <h1 class="big-title">Happy Birthday Durga!</h1>
+            <p class="sub-subtext">💖 ❤️ (slow slow udee...)</p>
+        </div>
 
-    // Emoji Explosion Effect on Tap
-    function triggerExplosion(emojis) {
-      for (let i = 0; i < 20; i++) {
-        const el = document.createElement('div');
-        el.className = 'burst-emoji';
-        el.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-        const x = (Math.random() - 0.5) * 300;
-        const y = (Math.random() - 0.5) * 300;
-        el.style.setProperty('--tx', `${x}px`);
-        el.style.setProperty('--ty', `${y}px`);
-        el.style.left = '50%';
-        el.style.top = '50%';
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), 1200);
-      }
-    }
+        <!-- STAGE 3: Balloons -->
+        <div class="message-block" id="stage-3">
+            <p class="subtext">20 sal ka age hogya hai... ab thoda serious ho jao... 🤫</p>
+            <p class="subtext">lekin pehle... PARTY! 🎈🎈🎈</p>
+        </div>
 
-    // 8-9 Sequential Romantic Taps
-    function nextTap() {
-      // Play Music on First Tap
-      const audio = document.getElementById('bgMusic');
-      if (currentStep === 1) {
-        audio.play().catch(() => {});
-      }
+        <!-- STAGE 4: Gifts -->
+        <div class="message-block" id="stage-4">
+            <p class="subtext">Tumhre liye dher sare Gifts ayee hain... (slow mode) 🎁🎁🎁</p>
+            <h1 class="big-title">Open it?</h1>
+        </div>
 
-      currentStep++;
-      if (currentStep > totalSteps) currentStep = totalSteps;
+        <!-- STAGE 5: Stars & Glitter -->
+        <div class="message-block" id="stage-5">
+            <h1 class="big-title">Wish on a Star!</h1>
+            <p class="subtext">Sare wish puray ho! (slow glittering stars) ✨✨✨</p>
+        </div>
 
-      const heading = document.getElementById('heading');
-      const subtext = document.getElementById('subtext');
-      const btnText = document.getElementById('btnText');
-      const extra = document.getElementById('extraContent');
-      const counter = document.getElementById('stepCounter');
+        <!-- STAGE 6: Hearts (Intense) -->
+        <div class="message-block" id="stage-6">
+            <h1 class="big-title">Sare hearts bas tumhare!</h1>
+            <p class="subtext">bohot sara pyaar... 💖💖💖 (slow rain of hearts)</p>
+        </div>
 
-      counter.innerText = `Tap ${currentStep} of ${totalSteps}`;
+        <!-- STAGE 7: Confetti Blast -->
+        <div class="message-block" id="stage-7">
+            <p class="subtext">And many more years... of happiness!</p>
+            <h1 class="big-title">CELEBRATION! 🎉🎉🎉</h1>
+        </div>
 
-      switch(currentStep) {
-        case 2:
-          triggerExplosion(['🌸', '🌹', '💐', '🌷']);
-          heading.className = 'big-title';
-          heading.innerText = 'HAPPY BIRTHDAY DURGA BHUJ! 🌹';
-          subtext.innerText = 'Ye phool sirf aur sirf tumhare liye hain... 💐🌸🌷';
-          btnText.innerText = 'Aage Tap Karo 💕';
-          break;
+        <!-- STAGE 8: Video & Cake -->
+        <div class="message-block" id="stage-8">
+            <p class="subtext">Hugs and Cake Time!</p>
+            <div id="video-placeholder" style="width:100%; padding-bottom:56.25%; background:#ffe0e0; position:relative;">
+                <p style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:#ec407a;">(Video placeholder: add video link in code)</p>
+            </div>
+            <p class="subtext">Video or GIF: Cake Cut 🎂, Hug 🤗</p>
+        </div>
 
-        case 3:
-          triggerExplosion(['💖', '💗', '💓', '💕', '✨']);
-          heading.className = '';
-          heading.innerText = 'Official 19th Chapter 🎉';
-          subtext.innerText = 'Aaj tum poore 19 years ki ho gayi ho! ✨ Mubarak ho ye pyaara sa saal!';
-          btnText.innerText = 'Sweet Surprise 🎁';
-          break;
+        <!-- STAGE 9: Final Note -->
+        <div class="message-block" id="stage-9">
+            <p class="subtext">Hamesha khush raho, hamesha aage badho.</p>
+            <p class="subtext">Sal Mubarak again, our dearest Durga! ❤️❤️❤️</p>
+        </div>
 
-        case 4:
-          triggerExplosion(['🎁', '🎈', '💖', '🥳']);
-          heading.innerText = 'Gifts Explosion For You! 🎁';
-          subtext.innerText = 'Tumhari khushiyon ke liye dher saare gifts aur surprises!';
-          extra.innerHTML = '<div style="font-size: 50px; margin: 15px 0;">🎁 🧸 💍 👑</div>';
-          btnText.innerText = 'Aage Ek Aur Magic ✨';
-          break;
+    </div>
 
-        case 5:
-          triggerExplosion(['🌹', '❤️', '💋', '🌹']);
-          extra.innerHTML = '';
-          heading.innerText = 'Dher Saare Red Roses 🌹';
-          subtext.innerText = 'Zindagi bhar tumhari rahegi aisi hi khushboo... Rose garden for Durga! 🌹🌹🌹';
-          btnText.innerText = 'Tap For Heart Flying ❤️';
-          break;
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let currentStage = 1;
+        const totalStages = 9;
+        let particles = [];
 
-        case 6:
-          triggerExplosion(['💖', '💘', '❤️‍🔥', '💕']);
-          heading.innerText = 'Hearts Flying Only For You! 💞';
-          subtext.innerText = 'Mera har ek dil ka dhadkan bas tumhare liye hai Durga... 💕';
-          btnText.innerText = 'Tap Love Secret 💌';
-          break;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        case 7:
-          triggerExplosion(['💌', '✨', '💖']);
-          heading.innerText = 'A Special Note 💌';
-          subtext.innerText = '"Tum mere liye bohot zaroori ho... Tumhari smile hamesha aisi hi chamakti rahe!" 🥰';
-          btnText.innerText = 'Cake Cutting Time 🎂';
-          break;
+        function Particle(x, y, char, size, dy, color) {
+            this.x = x;
+            this.y = y;
+            this.char = char;
+            this.size = size;
+            this.dy = dy;
+            this.color = color;
+            this.opacity = 1;
 
-        case 8:
-          triggerExplosion(['🎂', '🎉', '🕯️', '✨']);
-          heading.innerText = 'Make A Wish & Blow 🎂';
-          subtext.innerText = 'Chalo ab pyaara sa wish maango aur 19th Birthday ka cake cut karo! 🎂🕯️';
-          extra.innerHTML = '<div style="font-size: 60px; margin: 10px 0;">🎂🥳✨</div>';
-          btnText.innerText = 'Final Love Note ❤️';
-          break;
+            this.update = function() {
+                this.y += this.dy;
+                if (this.y < -50) { // Off screen
+                    this.y = canvas.height + 10;
+                }
+                this.opacity -= 0.001; // Fade out slowly
+            }
 
-        case 9:
-          triggerExplosion(['💖', '🌹', '✨', '👑', '🎉', '🎂']);
-          heading.innerText = 'Forever Yours, Durga! 💖';
-          subtext.innerText = 'Happy 19th Birthday Durga Bhuj! May all your dreams come true! 👑✨❤️';
-          extra.innerHTML = '<div style="font-size: 40px; margin-top: 10px;">💖 🌹 🎂 👑 🎁</div>';
-          btnText.innerText = 'Replay Magic 🔄';
-          // Loop back
-          document.querySelector('.tap-btn').onclick = () => location.reload();
-          break;
-      }
-    }
-  </script>
+            this.draw = function() {
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.font = `${this.size}px Satisfy`;
+                ctx.fillText(this.char, this.x, this.y);
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        function initParticles(symbol, colorList) {
+            particles = [];
+            for (let i = 0; i < 50; i++) {
+                const char = symbol;
+                const x = Math.random() * canvas.width;
+                const y = canvas.height + Math.random() * canvas.height;
+                const size = 15 + Math.random() * 25;
+                const dy = -0.5 - Math.random() * 0.5; // Very slow speed
+                const color = colorList[Math.floor(Math.random() * colorList.length)];
+                particles.push(new Particle(x, y, char, size, dy, color));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let p of particles) {
+                p.update();
+                p.draw();
+            }
+            requestAnimationFrame(animate);
+        }
+        animate(); // Start animation loop
+
+        function handleTap() {
+            if (currentStage < totalStages) {
+                // Hide current stage
+                document.getElementById(`stage-${currentStage}`).classList.remove('visible');
+                currentStage++;
+                // Show next stage with transition
+                setTimeout(() => {
+                   document.getElementById(`stage-${currentStage}`).classList.add('visible');
+                   updateFloatingEffects(currentStage);
+                }, 100);
+            }
+        }
+
+        function updateFloatingEffects(stage) {
+            switch (stage) {
+                case 2: // Flowers & Title
+                    initParticles('🌹', ['#e91e63', '#b71c1c', '#f8bbd0']);
+                    break;
+                case 3: // Balloons
+                    initParticles('🎈', ['#f44336', '#ffeb3b', '#2196f3', '#4caf50', '#9c27b0']);
+                    break;
+                case 4: // Gifts
+                    initParticles('🎁', ['#ec407a', '#b71c1c']);
+                    break;
+                case 5: // Stars
+                    initParticles('✨', ['#ffeb3b', '#ffd600', '#fafafa']);
+                    break;
+                case 6: // Hearts
+                    initParticles('❤️', ['#d81b60', '#b71c1c', '#f8bbd0']);
+                    break;
+                case 7: // Confetti
+                    initParticles('🎉', ['#f44336', '#ffeb3b', '#2196f3', '#4caf50', '#9c27b0']);
+                    break;
+                case 8: // Video stage: Clear particles to focus on video
+                    particles = [];
+                    // [IMPORTANT] Replace video placeholder with real video/GIF
+                    const videoPlaceholder = document.getElementById('video-placeholder');
+                    videoPlaceholder.innerHTML = '<iframe width="100%" height="100%" src="[ADD_GIF_OR_VIDEO_EMBED_LINK_HERE]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                    break;
+                case 9: // Final stage: Mix of effects
+                    initParticles('❤️🌹🎁🎂', ['#b71c1c']);
+                    break;
+            }
+        }
+
+        // Initialize first stage effect
+        initParticles('🌸', ['#f8bbd0']);
+    </script>
+
 </body>
 </html>
