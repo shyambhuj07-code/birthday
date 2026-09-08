@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday My Love!</title>
+  <title>Happy 19th Birthday Durga! ❤️</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body {
-      background: linear-gradient(135deg, #ff4e50, #f9d423);
-      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1a000c, #4a001f, #800020);
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -17,94 +16,263 @@
       color: #fff;
       text-align: center;
     }
-    .heart {
+
+    /* Floating Canvas Elements */
+    .particle {
       position: absolute;
-      bottom: -10px;
-      font-size: 24px;
+      pointer-events: none;
       animation: floatUp 4s linear infinite;
-      opacity: 0.8;
+      z-index: 1;
     }
     @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+      0% { transform: translateY(105vh) scale(0.6) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.4) rotate(360deg); opacity: 0; }
     }
-    .card {
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(15px);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      width: 90%;
-      max-width: 350px;
+
+    /* Main Romantic Card */
+    .card-container {
+      position: relative;
       z-index: 10;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      width: 90%;
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(255, 182, 193, 0.4);
+      border-radius: 25px;
+      padding: 35px 25px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 15px rgba(255,192,203,0.2);
     }
-    h1 {
-      font-size: 2rem;
-      animation: heartbeat 1.2s infinite alternate;
-      margin-bottom: 10px;
-    }
-    @keyframes heartbeat {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.1); }
-    }
-    p { font-size: 1.1rem; margin-bottom: 20px; line-height: 1.4; }
-    .gift {
-      font-size: 70px;
-      cursor: pointer;
-      animation: shake 1.5s infinite;
+
+    .badge {
       display: inline-block;
+      background: linear-gradient(45deg, #ff007f, #ff5e62);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 10px rgba(255,0,127,0.4);
     }
-    @keyframes shake {
-      0%, 100% { transform: rotate(0deg); }
-      20% { transform: rotate(-10deg); }
-      40% { transform: rotate(10deg); }
-      60% { transform: rotate(-5deg); }
-      80% { transform: rotate(5deg); }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #fff0f5;
+      text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f;
+      line-height: 1.3;
+      margin-bottom: 15px;
     }
-    .surprises {
-      display: none;
+
+    .big-title {
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: linear-gradient(to right, #ffe6e8, #ff69b4, #ff1493);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 15px 0;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.06); }
+    }
+
+    p.subtitle {
+      font-size: 1.1rem;
+      color: #ffdeeb;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    /* Tap Button */
+    .tap-btn {
+      background: linear-gradient(45deg, #ff1493, #ff69b4);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255, 20, 147, 0.5);
+      transition: all 0.3s ease;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tap-btn:active {
+      transform: scale(0.92);
+      box-shadow: 0 4px 10px rgba(255, 20, 147, 0.8);
+    }
+
+    .step-counter {
       margin-top: 15px;
-      animation: popup 0.8s ease-in-out forwards;
+      font-size: 12px;
+      color: #ffb6c1;
+      opacity: 0.8;
     }
-    @keyframes popup {
-      0% { opacity: 0; transform: scale(0.5); }
-      100% { opacity: 1; transform: scale(1); }
+
+    /* Confetti & Burst effects */
+    .burst-emoji {
+      position: absolute;
+      pointer-events: none;
+      font-size: 30px;
+      animation: burst 1.2s ease-out forwards;
+      z-index: 20;
     }
-    .gift-icons { font-size: 35px; margin-top: 10px; }
+    @keyframes burst {
+      0% { transform: translate(0,0) scale(0.5); opacity: 1; }
+      100% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 0; }
+    }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>💖 Happy Birthday! 💖</h1>
-    <p>Aap meri zindagi ki sabse pyari gift ho! Love you forever! 🌹✨</p>
-    
-    <div class="gift" onclick="showGifts()">🎁</div>
-    <div style="font-size: 12px; opacity: 0.8; margin-top: 5px;">(Gift par tap karo)</div>
+  <!-- Background Music (Auto-plays after first tap) -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sunset-2615.mp3" type="audio/mpeg">
+  </audio>
 
-    <div class="surprises" id="giftsArea">
-      <h3>Aapke Liye Gifts:</h3>
-      <div class="gift-icons">💐 🧸 💍 🎂</div>
-      <p style="margin-top: 10px; font-weight: bold;">I Love You! ❤️</p>
-    </div>
+  <div class="card-container" id="card">
+    <div class="badge">SPECIAL DAY 🎂</div>
+    <h1 id="heading">Happy Birthday Durga ❤️</h1>
+    <p class="subtitle" id="subtext">Tumhe tumhre janm din ki bohot bohot subhkamna! ✨</p>
+    
+    <div id="extraContent"></div>
+
+    <button class="tap-btn" onclick="nextTap()">
+      <span id="btnText">Tap Karo Durga 🎁</span>
+    </button>
+    
+    <div class="step-counter" id="stepCounter">Tap 1 of 9</div>
   </div>
 
   <script>
-    setInterval(() => {
-      let heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.innerHTML = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 4000);
-    }, 300);
+    let currentStep = 1;
+    const totalSteps = 9;
 
-    function showGifts() {
-      document.getElementById('giftsArea').style.display = 'block';
+    // Background Floating Rose & Heart Generator
+    function createFloatingParticles() {
+      const symbols = ['🌹', '💖', '🌸', '✨', '🎁', '🎂', '🌷', '💘'];
+      setInterval(() => {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        particle.style.fontSize = (Math.random() * 15 + 20) + 'px';
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 4000);
+      }, 250);
+    }
+    createFloatingParticles();
+
+    // Emoji Explosion Effect on Tap
+    function triggerExplosion(emojis) {
+      for (let i = 0; i < 20; i++) {
+        const el = document.createElement('div');
+        el.className = 'burst-emoji';
+        el.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        const x = (Math.random() - 0.5) * 300;
+        const y = (Math.random() - 0.5) * 300;
+        el.style.setProperty('--tx', `${x}px`);
+        el.style.setProperty('--ty', `${y}px`);
+        el.style.left = '50%';
+        el.style.top = '50%';
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 1200);
+      }
+    }
+
+    // 8-9 Sequential Romantic Taps
+    function nextTap() {
+      // Play Music on First Tap
+      const audio = document.getElementById('bgMusic');
+      if (currentStep === 1) {
+        audio.play().catch(() => {});
+      }
+
+      currentStep++;
+      if (currentStep > totalSteps) currentStep = totalSteps;
+
+      const heading = document.getElementById('heading');
+      const subtext = document.getElementById('subtext');
+      const btnText = document.getElementById('btnText');
+      const extra = document.getElementById('extraContent');
+      const counter = document.getElementById('stepCounter');
+
+      counter.innerText = `Tap ${currentStep} of ${totalSteps}`;
+
+      switch(currentStep) {
+        case 2:
+          triggerExplosion(['🌸', '🌹', '💐', '🌷']);
+          heading.className = 'big-title';
+          heading.innerText = 'HAPPY BIRTHDAY DURGA BHUJ! 🌹';
+          subtext.innerText = 'Ye phool sirf aur sirf tumhare liye hain... 💐🌸🌷';
+          btnText.innerText = 'Aage Tap Karo 💕';
+          break;
+
+        case 3:
+          triggerExplosion(['💖', '💗', '💓', '💕', '✨']);
+          heading.className = '';
+          heading.innerText = 'Official 19th Chapter 🎉';
+          subtext.innerText = 'Aaj tum poore 19 years ki ho gayi ho! ✨ Mubarak ho ye pyaara sa saal!';
+          btnText.innerText = 'Sweet Surprise 🎁';
+          break;
+
+        case 4:
+          triggerExplosion(['🎁', '🎈', '💖', '🥳']);
+          heading.innerText = 'Gifts Explosion For You! 🎁';
+          subtext.innerText = 'Tumhari khushiyon ke liye dher saare gifts aur surprises!';
+          extra.innerHTML = '<div style="font-size: 50px; margin: 15px 0;">🎁 🧸 💍 👑</div>';
+          btnText.innerText = 'Aage Ek Aur Magic ✨';
+          break;
+
+        case 5:
+          triggerExplosion(['🌹', '❤️', '💋', '🌹']);
+          extra.innerHTML = '';
+          heading.innerText = 'Dher Saare Red Roses 🌹';
+          subtext.innerText = 'Zindagi bhar tumhari rahegi aisi hi khushboo... Rose garden for Durga! 🌹🌹🌹';
+          btnText.innerText = 'Tap For Heart Flying ❤️';
+          break;
+
+        case 6:
+          triggerExplosion(['💖', '💘', '❤️‍🔥', '💕']);
+          heading.innerText = 'Hearts Flying Only For You! 💞';
+          subtext.innerText = 'Mera har ek dil ka dhadkan bas tumhare liye hai Durga... 💕';
+          btnText.innerText = 'Tap Love Secret 💌';
+          break;
+
+        case 7:
+          triggerExplosion(['💌', '✨', '💖']);
+          heading.innerText = 'A Special Note 💌';
+          subtext.innerText = '"Tum mere liye bohot zaroori ho... Tumhari smile hamesha aisi hi chamakti rahe!" 🥰';
+          btnText.innerText = 'Cake Cutting Time 🎂';
+          break;
+
+        case 8:
+          triggerExplosion(['🎂', '🎉', '🕯️', '✨']);
+          heading.innerText = 'Make A Wish & Blow 🎂';
+          subtext.innerText = 'Chalo ab pyaara sa wish maango aur 19th Birthday ka cake cut karo! 🎂🕯️';
+          extra.innerHTML = '<div style="font-size: 60px; margin: 10px 0;">🎂🥳✨</div>';
+          btnText.innerText = 'Final Love Note ❤️';
+          break;
+
+        case 9:
+          triggerExplosion(['💖', '🌹', '✨', '👑', '🎉', '🎂']);
+          heading.innerText = 'Forever Yours, Durga! 💖';
+          subtext.innerText = 'Happy 19th Birthday Durga Bhuj! May all your dreams come true! 👑✨❤️';
+          extra.innerHTML = '<div style="font-size: 40px; margin-top: 10px;">💖 🌹 🎂 👑 🎁</div>';
+          btnText.innerText = 'Replay Magic 🔄';
+          // Loop back
+          document.querySelector('.tap-btn').onclick = () => location.reload();
+          break;
+      }
     }
   </script>
-
 </body>
 </html>
