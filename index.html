@@ -1,304 +1,129 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salgira Mubarak, Durga! ❤️</title>
+    <title>Happy Birthday!</title>
     <style>
-        @font-face {
-            font-family: 'Satisfy';
-            font-style: normal;
-            font-weight: 400;
-            src: url(https://fonts.gstatic.com/s/satisfy/v14/rP2Hp2yn6M65_OnJ_v-fxg.woff2) format('woff2');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body, html {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #ffe0e0;
-            background-image: linear-gradient(135deg, #fff0f0 0%, #ffdde1 100%);
-            height: 100%;
             width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #0d0008;
+            font-family: 'Courier New', Courier, monospace;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Satisfy', cursive;
-            user-select: none;
-            cursor: pointer;
         }
 
-        /* Floating Background Layer */
-        #bg-canvas {
-            position: fixed;
+        canvas {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 1;
-            pointer-events: none;
         }
 
-        /* Floating Image (Slow Motion) */
-        .floating-image {
-            position: fixed;
-            opacity: 0.2;
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid rgba(255, 255, 255, 0.6);
-            animation: floatSlow 60s linear infinite;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        /* Main Content Layer */
-        #content-layer {
+        .title-container {
             position: relative;
             z-index: 10;
-            width: 85%;
-            max-width: 600px;
             text-align: center;
+            padding: 10px;
+            pointer-events: none;
         }
 
-        /* Message Elements */
-        .message-block {
-            display: none;
-            transition: transform 1.5s ease-out, opacity 1s ease-in-out;
-            transform: translateY(30px);
-            opacity: 0;
-        }
-
-        .message-block.visible {
-            display: block;
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .subtext {
-            font-size: 2rem;
-            color: #d81b60;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-
-        .big-title {
-            font-size: 3.5rem;
-            font-weight: bold;
-            color: #b71c1c;
-            line-height: 1.1;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .sub-subtext {
-            font-size: 1.6rem;
-            color: #ec407a;
-            margin-top: 10px;
-        }
-
-        .tap-msg {
-            font-size: 1.4rem;
-            color: #ec407a;
-            margin-top: 40px;
-            font-style: italic;
-            animation: pulse 2s infinite;
-        }
-
-        .gif-box {
-            width: 100%;
-            max-width: 300px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            margin: 15px auto;
-            display: block;
-        }
-
-        @keyframes floatSlow {
-            0% { top: 10%; left: 10%; }
-            25% { top: 60%; left: 65%; }
-            50% { top: 30%; left: 35%; }
-            75% { top: 75%; left: 15%; }
-            100% { top: 10%; left: 10%; }
+        .birthday-text {
+            color: #ff66b2;
+            font-size: 8vw;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 
+                0 0 10px #ff007f,
+                0 0 20px #ff007f,
+                0 0 40px #ff007f,
+                0 0 80px #ff007f;
+            animation: pulse 2s infinite alternate;
         }
 
         @keyframes pulse {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
+            0% {
+                transform: scale(0.98);
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(1.02);
+                opacity: 1;
+            }
         }
     </style>
 </head>
-<body onclick="handleTap()">
+<body>
 
-    <!-- Fixed Floating Background Image -->
-    <img src="image_8.png" class="floating-image" alt="Durga" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop'">
+    <canvas id="matrix"></canvas>
 
-    <!-- Canvas for Floating Particle Effects -->
-    <canvas id="bg-canvas"></canvas>
-
-    <!-- Main Content Layer -->
-    <div id="content-layer">
-
-        <!-- STAGE 1: Greeting -->
-        <div class="message-block visible" id="stage-1">
-            <p class="subtext">happy birthday durga tumhe tumhre janm din k subhkamna ❤️</p>
-            <p class="tap-msg">(tap karo...) </p>
-        </div>
-
-        <!-- STAGE 2: Flowers & Title -->
-        <div class="message-block" id="stage-2">
-            <h1 class="big-title">Happy Birthday Durga! 🌹</h1>
-            <p class="sub-subtext">Dher saare phool aur pyaari wishes... 🌸</p>
-        </div>
-
-        <!-- STAGE 3: Balloons -->
-        <div class="message-block" id="stage-3">
-            <p class="subtext">20 sal ka age hogya hai... ab thoda serious ho jao... 🤫</p>
-            <p class="subtext">lekin pehle... PARTY! 🎈🎈🎈</p>
-        </div>
-
-        <!-- STAGE 4: Gifts -->
-        <div class="message-block" id="stage-4">
-            <p class="subtext">Tumhre liye dher sare Gifts ayee hain... 🎁🎁🎁</p>
-            <h1 class="big-title">Open it?</h1>
-        </div>
-
-        <!-- STAGE 5: Stars & Glitter -->
-        <div class="message-block" id="stage-5">
-            <h1 class="big-title">Wish on a Star! ✨</h1>
-            <p class="subtext">Sare wish puray ho! ✨✨✨</p>
-        </div>
-
-        <!-- STAGE 6: Hearts -->
-        <div class="message-block" id="stage-6">
-            <h1 class="big-title">Sare hearts bas tumhare! ❤️</h1>
-            <p class="subtext">bohot sara pyaar... 💖💖💖</p>
-        </div>
-
-        <!-- STAGE 7: Confetti Blast -->
-        <div class="message-block" id="stage-7">
-            <p class="subtext">And many more years... of happiness!</p>
-            <h1 class="big-title">CELEBRATION! 🎉🎉🎉</h1>
-        </div>
-
-        <!-- STAGE 8: GIF & Cake -->
-        <div class="message-block" id="stage-8">
-            <p class="subtext">Cake Cutting & Warm Hugs! 🎂🤗</p>
-            <div id="video-placeholder"></div>
-        </div>
-
-        <!-- STAGE 9: Final Note -->
-        <div class="message-block" id="stage-9">
-            <p class="subtext">Hamesha khush raho, hamesha aage badho.</p>
-            <p class="subtext">Sal Mubarak again, dearest Durga! ❤️❤️❤️</p>
-        </div>
-
+    <div class="title-container">
+        <h1 class="birthday-text">HAPPY BIRTHDAY</h1>
     </div>
 
     <script>
-        const canvas = document.getElementById('bg-canvas');
+        const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
-        let currentStage = 1;
-        const totalStages = 9;
-        let particles = [];
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-        function Particle(x, y, char, size, dy, color) {
-            this.x = x;
-            this.y = y;
-            this.char = char;
-            this.size = size;
-            this.dy = dy;
-            this.color = color;
-            this.opacity = 1;
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        const alphabet = katakana + latin;
 
-            this.update = function() {
-                this.y += this.dy;
-                if (this.y < -50) {
-                    this.y = canvas.height + 10;
+        const fontSize = 16;
+        let columns = Math.floor(canvas.width / fontSize);
+        let drops = [];
+
+        function initDrops() {
+            columns = Math.floor(canvas.width / fontSize);
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.random() * -100;
+            }
+        }
+        initDrops();
+
+        function draw() {
+            // Dark pink translucent overlay for tail trail effect
+            ctx.fillStyle = 'rgba(15, 0, 10, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#ff3399';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+
+                ctx.fillText(text, x, y);
+
+                if (y > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
                 }
-                this.opacity -= 0.001;
-            }
-
-            this.draw = function() {
-                ctx.globalAlpha = this.opacity;
-                ctx.fillStyle = this.color;
-                ctx.font = `${this.size}px Satisfy`;
-                ctx.fillText(this.char, this.x, this.y);
-                ctx.globalAlpha = 1;
+                drops[i]++;
             }
         }
 
-        function initParticles(symbol, colorList) {
-            particles = [];
-            for (let i = 0; i < 40; i++) {
-                const char = symbol;
-                const x = Math.random() * canvas.width;
-                const y = canvas.height + Math.random() * canvas.height;
-                const size = 18 + Math.random() * 25;
-                const dy = -0.4 - Math.random() * 0.4;
-                const color = colorList[Math.floor(Math.random() * colorList.length)];
-                particles.push(new Particle(x, y, char, size, dy, color));
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let p of particles) {
-                p.update();
-                p.draw();
-            }
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        function handleTap() {
-            if (currentStage < totalStages) {
-                document.getElementById(`stage-${currentStage}`).classList.remove('visible');
-                currentStage++;
-                setTimeout(() => {
-                   document.getElementById(`stage-${currentStage}`).classList.add('visible');
-                   updateFloatingEffects(currentStage);
-                }, 100);
-            }
-        }
-
-        function updateFloatingEffects(stage) {
-            switch (stage) {
-                case 2:
-                    initParticles('🌹', ['#e91e63', '#b71c1c', '#f8bbd0']);
-                    break;
-                case 3:
-                    initParticles('🎈', ['#f44336', '#ffeb3b', '#2196f3', '#4caf50', '#9c27b0']);
-                    break;
-                case 4:
-                    initParticles('🎁', ['#ec407a', '#b71c1c']);
-                    break;
-                case 5:
-                    initParticles('✨', ['#ffeb3b', '#ffd600', '#fafafa']);
-                    break;
-                case 6:
-                    initParticles('❤️', ['#d81b60', '#b71c1c', '#f8bbd0']);
-                    break;
-                case 7:
-                    initParticles('🎉', ['#f44336', '#ffeb3b', '#2196f3', '#4caf50', '#9c27b0']);
-                    break;
-                case 8:
-                    particles = [];
-                    const videoPlaceholder = document.getElementById('video-placeholder');
-                    videoPlaceholder.innerHTML = '<img class="gif-box" src="https://media.tenor.com/mO_kUp5Mhh4AAAAC/birthday-cake.gif" alt="Birthday Cake Cutting">';
-                    break;
-                case 9:
-                    initParticles('❤️🌹🎁🎂', ['#b71c1c']);
-                    break;
-            }
-        }
-
-        initParticles('🌸', ['#f8bbd0']);
+        setInterval(draw, 33);
     </script>
 </body>
 </html>
